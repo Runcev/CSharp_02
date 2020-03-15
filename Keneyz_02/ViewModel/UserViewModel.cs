@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Keneyz_02.Tools;
 using Keneyz_02.Model;
+using Keneyz_02.Tools.Exeptions;
 
 namespace Keneyz_02.ViewModel
 {
@@ -59,35 +61,50 @@ namespace Keneyz_02.ViewModel
         {
             LoaderManager.Instance.ShowLoader();
 
-            await Task.Run(() =>
+            var res = await Task.Run(() =>
             {
-                if (_person.DateOfBirth.Year < DateTime.Today.Year - 135  || _person.DateOfBirth > DateTime.Today)
+                _person.Calculator();
+                try
                 {
-                    LoaderManager.Instance.HideLoader();
-                    MessageBox.Show("Wrong date.\n Try again");
-                }
-                else
-                {
-                    _person.Calculator();
+                    _person.Validate();
                     if (_person.DateOfBirth.Month == DateTime.Today.Month &&
                         _person.DateOfBirth.Day == DateTime.Today.Day)
                     {
                         MessageBox.Show("Happy Birthday");
                     }
-
-                    OnPropertyChanged(nameof(Age));
-                    OnPropertyChanged(nameof(IsAdult));
-                    OnPropertyChanged(nameof(IsBirthday));
-                    OnPropertyChanged(nameof(Western));
-                    OnPropertyChanged(nameof(Chinese));
-                    OnPropertyChanged(nameof(Name));
-                    OnPropertyChanged(nameof(Surname));
-                    OnPropertyChanged(nameof(Email));
+                }
+                catch (NotBornException e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                catch (TooOldException e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
+                }
+                catch (InvalidEmailException e)
+                {
+                    MessageBox.Show(e.Message);
+                    return false;
                 }
 
-                Thread.Sleep(100);
-                LoaderManager.Instance.HideLoader();
+
+                OnPropertyChanged(nameof(Age));
+                OnPropertyChanged(nameof(IsAdult));
+                OnPropertyChanged(nameof(IsBirthday));
+                OnPropertyChanged(nameof(Western));
+                OnPropertyChanged(nameof(Chinese));
+                OnPropertyChanged(nameof(Name));
+                OnPropertyChanged(nameof(Surname));
+                OnPropertyChanged(nameof(Email));
+
+                return true;
+
             });
+
+            Thread.Sleep(100);
+            LoaderManager.Instance.HideLoader();
         }
 
         
@@ -97,7 +114,7 @@ namespace Keneyz_02.ViewModel
             !string.IsNullOrWhiteSpace(_person.Email) &&
             !string.IsNullOrWhiteSpace(_person.Name) &&
             !string.IsNullOrWhiteSpace(_person.Surname) &&
-            !string.IsNullOrWhiteSpace(_person.DateOfBirth.ToLongTimeString());
+            !string.IsNullOrWhiteSpace(_person.DateOfBirth.ToString());
 
 
         public event PropertyChangedEventHandler PropertyChanged;

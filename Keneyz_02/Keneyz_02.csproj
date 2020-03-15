@@ -60,6 +60,9 @@
     </ApplicationDefinition>
     <Compile Include="Model\Person.cs" />
     <Compile Include="Tools\BaseViewModel.cs" />
+    <Compile Include="Tools\Exeptions\InvalidEmailExceptions.cs" />
+    <Compile Include="Tools\Exeptions\NotBornException.cs" />
+    <Compile Include="Tools\Exeptions\TooOldException.cs" />
     <Compile Include="Tools\ILoaderOwner.cs" />
     <Compile Include="Tools\LoaderManager.cs" />
     <Compile Include="Tools\RelayCommand.cs" />

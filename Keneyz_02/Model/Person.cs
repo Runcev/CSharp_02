@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
+using Keneyz_02.Tools.Exeptions;
 
 namespace Keneyz_02.Model
 {
@@ -58,6 +60,28 @@ namespace Keneyz_02.Model
         private string CheckAdult()
         {
             return DateOfBirth == default ? "" : (Age >= 18).ToString();
+        }
+
+        public void Validate()
+        {
+            if (Age < 0)
+            {
+                throw new NotBornException();
+            }
+
+            if (Age > 135)
+            {
+                throw new TooOldException();
+            }
+
+            var emailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+
+            if (!emailRegex.IsMatch(Email))
+            {
+                throw new InvalidEmailException(Email);
+            }
+
+
         }
 
         private string WesternCount()
