@@ -25,14 +25,10 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Input your birthday" Margin="5" HorizontalAlignment="Center"></TextBlock>
-            <DatePicker SelectedDate="{Binding DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
-        </StackPanel>
 
-        <Button Grid.Row="4" Grid.ColumnSpan ="4" Grid.Column="0" Content="Calculate" Height="20" Width="80" Command="{Binding ProceedCommand}" ></Button>
 
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" >
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <TextBlock Text="Your first name" HorizontalAlignment="Center"></TextBlock> 
             <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="30" Margin="5" Width="200"></TextBox>
         </StackPanel>
@@ -46,6 +42,13 @@
             <TextBlock Text="Your email" HorizontalAlignment="Center" ></TextBlock>
             <TextBox Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  MaxLength="35" Margin="5" Width="200"></TextBox>
         </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Input your birthday" Margin="5" HorizontalAlignment="Center"></TextBlock>
+            <DatePicker SelectedDate="{Binding DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+        </StackPanel>
+
+        <Button Grid.Row="4" Grid.ColumnSpan ="4" Grid.Column="0" Content="Calculate" Height="20" Width="80" Command="{Binding ProceedCommand}" ></Button>
 
         <StackPanel Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" >
             <TextBlock Text="Your Name:" Margin="5"></TextBlock>

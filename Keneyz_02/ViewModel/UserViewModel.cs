@@ -72,6 +72,7 @@ namespace Keneyz_02.ViewModel
                     {
                         MessageBox.Show("Happy Birthday");
                     }
+
                 }
                 catch (NotBornException e)
                 {
@@ -88,7 +89,6 @@ namespace Keneyz_02.ViewModel
                     MessageBox.Show(e.Message);
                     return false;
                 }
-
 
                 OnPropertyChanged(nameof(Age));
                 OnPropertyChanged(nameof(IsAdult));
