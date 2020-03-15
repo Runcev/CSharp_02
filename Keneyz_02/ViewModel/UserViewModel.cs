@@ -18,16 +18,14 @@ namespace Keneyz_02.ViewModel
 
         private RelayCommand<object> _proceedCommand;
 
-
         public DateTime DateOfBirth
         {
+            get => _person.DateOfBirth;
             set
             {
                 _person.DateOfBirth = value;
                 OnPropertyChanged();
             }
-            get => (DateTime) _person.DateOfBirth;
-
         }
 
         public string Age => DateOfBirth == default ? "" : _person.Age.ToString();

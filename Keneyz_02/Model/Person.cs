@@ -8,6 +8,7 @@ namespace Keneyz_02.Model
 {
     class Person
     {
+        private DateTime _date;
         public DateTime DateOfBirth { set; get; }
 
         public int Age { set; get; }
@@ -133,20 +134,17 @@ namespace Keneyz_02.Model
             Name = name;
             Surname = surname;
             Email = email;
-        }
-
-        public Person(string name, string surname, string email)
-        {
-            Name = name;
-            Surname = surname;
-            Email = email;
-        }
-
-        public Person(string name, string surname, DateTime birthday)
-        {
-            Name = name;
-            Surname = surname;
             DateOfBirth = birthday;
+        }
+
+        public Person(string name, string surname, string email) : this(name, surname,email, DateTime.Now)
+        {
+
+        }
+
+        public Person(string name, string surname, DateTime birthday) : this(name, surname, "", birthday)
+        {
+
         }
     }
 }
